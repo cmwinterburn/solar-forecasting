@@ -1,0 +1,19 @@
+# Notebook junk
+.ipynb_checkpoints/
+
+# Python build/cache
+__pycache__/
+*.py[cod]
+
+# Jupyter logs/output
+*.nbconvert.ipynb
+
+# Environments
+env/
+venv/
+
+# Google Colab mount point
+/content/drive/
+
+# VS Code settings (optional)
+.vscode/

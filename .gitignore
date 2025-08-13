@@ -18,9 +18,7 @@ venv/
 # VS Code settings (optional)
 .vscode/
 
-# Large data files
+# Ignore large data files (DVC managed)
 data/
 !.gitignore
-models/
-!.gitignore
-/data
+

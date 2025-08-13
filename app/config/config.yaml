@@ -1,0 +1,7 @@
+paths:
+  pipeline_log_file: "D:/GitHub/solar-forecasting/logs/pipeline_log.csv"
+  data_download_file: "D:/GitHub/solar-forecasting/data/sharp_metadata_pipeline.csv"
+  scaler_file: "D:/GitHub/solar-forecasting/data/scaler.pkl"
+  data_pipeline_file: "D:/GitHub/solar-forecasting/data/data_pipeline.pt"
+  model_weights_file: "D:/GitHub/solar-forecasting/models/best_model_v2.pt"
+  forecast_file: "D:/GitHub/solar-forecasting/app/pipeline/forecast.json"

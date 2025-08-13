@@ -11,12 +11,7 @@ Understanding and predicting solar activity is critical for protecting space and
 - `notebooks/`: Jupyter notebooks for data exploration and model training
 - `data/`: Datasets (fetched externally or from Google Drive)
 - `models/`: Saved model weights
+- `app/`: Web GUI and associated scripts for real time forecasting service
 - `requirements.txt`: List of Python dependencies
 
-## Getting Started
 
-You can run the main notebooks on Google Colab:
-
-1. Clone the repo
-2. Mount your Google Drive
-3. Install dependencies if running locally:

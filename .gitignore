@@ -17,3 +17,10 @@ venv/
 
 # VS Code settings (optional)
 .vscode/
+
+# Large data files
+data/
+!.gitignore
+models/
+!.gitignore
+/data

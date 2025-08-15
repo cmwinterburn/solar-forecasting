@@ -2,6 +2,6 @@ paths:
   pipeline_log_file: "logs/pipeline_log.csv"
   data_download_file: "app/pipeline/sharp_metadata_dump.csv"
   scaler_file: "app/pipeline/scaler.pkl"
-  data_pipeline_file: "app/pipeline/data_pipeline.pt"
+  data_pipeline_file: "app/pipeline/data_feed.pt"
   model_weights_file: "models/best_model_v2.pt"
   forecast_file: "app/pipeline/forecast.json"

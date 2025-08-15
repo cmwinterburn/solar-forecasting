@@ -69,7 +69,7 @@ def download_data(logger, data_download_file):
     first_write = True
     end = Time.now()
     start = end - time_diff
-    days_of_data = 7
+    days_of_data = 3
     i = 0
     
     if os.path.exists(data_download_file):

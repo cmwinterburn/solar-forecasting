@@ -253,12 +253,12 @@ def prepare_data(logger, data_download_file, scaler_file, data_pipeline_file):
     data.replace(['MISSING', 'NaN'], np.nan, inplace=True)
     data['T_REC'] = pd.to_datetime(data['T_REC'].str.replace('_TAI', ''), format='%Y.%m.%d_%H:%M:%S')
 
-    data = replace_median_features(data)
-    data = linear_interpolation(data)
-    sequence_dict = prepare_sequence_dictionary(data)
-    recent_sequence_dict, forecast_time = extract_recent_sequences(sequence_dict)
+    data = replace_median_features(logger, data)
+    data = linear_interpolation(logger, data)
+    sequence_dict = prepare_sequence_dictionary(logger, data)
+    recent_sequence_dict, forecast_time = extract_recent_sequences(logger, sequence_dict)
     harpnums = list(recent_sequence_dict.keys())
-    transform_to_tensor(recent_sequence_dict, data_pipeline_file, scaler_file) 
+    transform_to_tensor(logger, recent_sequence_dict, data_pipeline_file, scaler_file) 
 
     return forecast_time, harpnums
 
@@ -418,10 +418,10 @@ if __name__ == "__main__":
     logger.info("Starting download...")
     download_data(logger, data_download_file)
     logger.info("Preparing data...")
-    forecast_time, harpnums = prepare_data(data_download_file, scaler_file, data_pipeline_file)
+    forecast_time, harpnums = prepare_data(logger, data_download_file, scaler_file, data_pipeline_file)
     logger.info("Success. Data prepared for model input.")
     logger.info("Initialising model...")
-    model, device = initialise_model(model_weights_file)
+    model, device = initialise_model(logger, model_weights_file)
     logger.info("Evaluating forecast...")
-    mean_linear, std_linear = evaluate_predictions(model, device, data_pipeline_file)
+    mean_linear, std_linear = evaluate_predictions(logger, model, device, data_pipeline_file)
     publish_forecast(forecast_file, mean_linear, std_linear, forecast_time, harpnums)

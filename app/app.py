@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import json
 import yaml
-from config.config import load_config
+from app.config.config import load_config
 
 config = load_config()
 forecast_file = config['paths']['forecast_file']

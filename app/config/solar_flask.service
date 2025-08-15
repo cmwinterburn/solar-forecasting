@@ -1,0 +1,13 @@
+[Unit]
+Description=Solar Forecast Flask App
+After=network.target
+
+[Service]
+User=cmwinterburn
+WorkingDirectory=/home/cmwinterburn/solar-forecasting
+ExecStart=/home/cmwinterburn/solar-forecasting/venv/bin/python -m app.app
+Restart=always
+Environment="PATH=/home/cmwinterburn/solar-forecasting/venv/bin"
+
+[Install]
+WantedBy=multi-user.target

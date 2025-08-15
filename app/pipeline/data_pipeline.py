@@ -15,7 +15,7 @@ import os
 import logging
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
-from config.config import load_config
+from app.config.config import load_config
 
 def setup_logger(log_file):
     # Create a logger object

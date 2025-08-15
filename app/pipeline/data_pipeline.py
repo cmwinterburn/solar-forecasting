@@ -17,25 +17,37 @@ import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 from app.config.config import load_config
 
-def setup_logger(log_file):
-    # Create a logger object
-    logger = logging.getLogger()
+import logging
+from logging.handlers import RotatingFileHandler
+import os
+
+def setup_logger(log_file, max_bytes=5_000_000, backup_count=3):
+    logger = logging.getLogger('solar_forecast')
     logger.setLevel(logging.DEBUG)
 
-    # Create a file handler to write log messages to a file
-    file_handler = logging.FileHandler(log_file)
+    # Prevent duplicate handlers if logger is already set up
+    if logger.handlers:
+        return logger
+
+    # Ensure the logs directory exists
+    os.makedirs(os.path.dirname(log_file), exist_ok=True)
+
+    # File handler with rotation
+    file_handler = RotatingFileHandler(
+        log_file, maxBytes=max_bytes, backupCount=backup_count
+    )
     file_handler.setLevel(logging.DEBUG)
 
-    # Create a console handler to print logs to the console (optional)
+    # Optional console handler
     console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.INFO)  # Adjust log level for console
+    console_handler.setLevel(logging.INFO)
 
-    # Define a log format (with timestamp, log level, and message)
+    # Formatter
     formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
     file_handler.setFormatter(formatter)
     console_handler.setFormatter(formatter)
 
-    # Add handlers to the logger
+    # Add handlers
     logger.addHandler(file_handler)
     logger.addHandler(console_handler)
 

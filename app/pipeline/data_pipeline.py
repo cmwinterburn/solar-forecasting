@@ -57,6 +57,8 @@ def download_data(logger, data_download_file):
     first_write = True
     end = Time.now()
     start = end - time_diff
+    days_of_data = 7
+    i = 0
     
     if os.path.exists(data_download_file):
         os.remove(data_download_file)
@@ -74,7 +76,7 @@ def download_data(logger, data_download_file):
 
         try:
             extract = c.query(f'hmi.sharp_720s[1-13459][{t_1_str}-{t_2_str}]', key=query_string)
-
+            
             if not extract.empty:
                 extract.to_csv(data_download_file, mode='a', index=False, header=first_write)
                 logger.info(f"Wrote {len(extract)} rows for {start} - {end}")
@@ -83,7 +85,11 @@ def download_data(logger, data_download_file):
                     start = start - time_diff
                     end = end - time_diff
                     continue
-                else:
+                elif i < days_of_data:
+                    i += 1
+                    start = start - time_diff
+                    end = end - time_diff
+                else:    
                     break
             else:
                 logger.warning(f"No records available for {start} - {end}")
@@ -361,8 +367,8 @@ def evaluate_predictions(logger, model, device, data_pipeline_file):
             for X_batch in real_time_loader:
                 X_batch = X_batch.to(device)
                 batch_mean, batch_std = mc_predict(model, X_batch, n_passes=50)
-                all_means.extend(batch_mean)
-                all_stds.extend(batch_std)
+                all_means.append(batch_mean)
+                all_stds.append(batch_std)
 
         all_means = np.array(all_means)
         all_stds = np.array(all_stds)
@@ -424,4 +430,4 @@ if __name__ == "__main__":
     model, device = initialise_model(logger, model_weights_file)
     logger.info("Evaluating forecast...")
     mean_linear, std_linear = evaluate_predictions(logger, model, device, data_pipeline_file)
-    publish_forecast(forecast_file, mean_linear, std_linear, forecast_time, harpnums)
+    publish_forecast(logger, forecast_file, mean_linear, std_linear, forecast_time, harpnums)

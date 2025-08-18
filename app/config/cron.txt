@@ -1,0 +1,3 @@
+# Run the data pipeline daily at midnight
+0 0 * * * cd /home/cmwinterburn/solar-forecasting && /home/cmwinterburn/solar-forecasting/venv/bin/python -m app.pipeline.data_pipeline >> /home/cmwinterburn/solar-forecasting/logs/pipeline_cron.log 2>&1
+

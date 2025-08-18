@@ -1,10 +1,10 @@
 {
-  "forecast_time": "2025-07-11 21:00:00",
+  "forecast_time": "2025-07-12 03:00:00",
   "measurements": [
     {
       "harpnum": 13446,
-      "intensity": -7.49,
-      "error": 0.25
+      "intensity": -7.58,
+      "error": 0.28
     }
   ]
 }

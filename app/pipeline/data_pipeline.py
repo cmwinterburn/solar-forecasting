@@ -22,6 +22,7 @@ from datetime import datetime
 def setup_logger(log_file, max_bytes=5_000_000, backup_count=3):
     """Return a logger object to record pipeline execution for debugging."""
     
+    os.makedirs(os.path.dirname(log_file), exist_ok=True)
     # Define a job specific logger.
     logger = logging.getLogger('solar_forecast')
     logger.setLevel(logging.DEBUG)

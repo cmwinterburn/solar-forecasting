@@ -1,7 +1,7 @@
 services:
   web:
     build: .
-    image: chriswinterburn/solar-forecasting:dev
+    image: cmwinterburn/solar-forecasting:dev
     container_name: solarforecasting-dev
     ports:
       - "5000:5000"

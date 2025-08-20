@@ -1,7 +1,7 @@
 services:
   web:
     build: .
-    image: chriswinterburn/solar-forecasting:prod
+    image: cmwinterburn/solar-forecasting:prod
     container_name: solarforecasting-prod
     volumes:
       - appdb:/solar-forecasting/app/database

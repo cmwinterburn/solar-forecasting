@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Solar Flare Forecast 24h</title>
+    <title>24h Solar Flare Forecast</title>
     <style>
         body {
             font-family: Tahoma;
@@ -60,32 +60,77 @@
         tr:nth-child(even) {
             background-color: white;
         }
+
+        .filter-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-family: Tahoma;
+        }
+
+        .filter-form label {
+            font-weight: bold;
+            color: black;
+        }
+
+        .filter-form input[type="date"] {
+            padding: 6px 10px;
+            border: 1px solid white;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .filter-form button {
+            padding: 6px 12px;
+            background-color: midnightblue;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .filter-form button:hover {
+            background-color: #3b3bb3;
+        }
     </style>
 </head>
 <body>
-    <div class="forecast">
-        <h1>24h Solar Flare Forecast</h1>
-        <p><strong>Forecast time:</strong> {{ forecast.forecast_time }}</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>HARP Number</th>
-                    <th>Intensity<br>(log₁₀ W/m²)</th>
-                    <th>Error ±</th>
-                    <th>Class</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for m in forecast.measurements %}
-                <tr>
-                    <td>{{ m.harpnum }}</td>
-                    <td>{{ m.intensity }}</td>
-                    <td>{{ m.error }}</td>
-                    <td>{{ m.class }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <h1>24h Solar Flare Forecast</h1>
+    <form method="get" class="filter-form">
+        <label for="date">Filter by date:</label>
+        <input type="date" id="date" name="date" value="{{ selected_date }}">
+        <button type="submit">Filter</button>
+    </form>
+    <!--If else statement to render predictions -->
+    {% if forecasts %}
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>HARPNUM</th>
+                <th>Flare Class</th>
+                <th>Intensity<br>(log₁₀ W/m²)</th>
+                <th>Error</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in forecasts %}
+            <tr>
+                <td>{{ row['forecast_time'] }}</td>
+                <td>{{ row['harpnum'] }}</td>
+                <td>{{ row['flare_class'] }}</td>
+                <td>{{ row['intensity'] }}</td>
+                <td>{{ row['std_error'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No forecasts found{{ " for " + selected_date }}.</p>
+    {% endif %}
 </body>
 </html>

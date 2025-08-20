@@ -17,6 +17,7 @@ from app.database.io import insert_forecast
 import logging
 from logging.handlers import RotatingFileHandler
 import os
+from datetime import datetime
 
 def setup_logger(log_file, max_bytes=5_000_000, backup_count=3):
     """Return a logger object to record pipeline execution for debugging."""
@@ -514,11 +515,13 @@ def write_predictions_to_db(logger, forecast_file, database_file):
             data = json.load(f) 
 
         forecast_time = data["forecast_time"]
+        dt = datetime.strptime(forecast_time, "%Y-%m-%d %H:%M:%S")
+        forecast_time_iso = dt.isoformat(timespec="seconds")
     
         for measurement in data["measurements"]:
             row_id = insert_forecast(
                 database_file,
-                forecast_time=forecast_time,
+                forecast_time=forecast_time_iso,
                 harpnum=str(measurement["harpnum"]),
                 flare_class=str(measurement["class"]),
                 intensity=float(measurement["intensity"]),

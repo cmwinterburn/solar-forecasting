@@ -10,8 +10,10 @@ WORKDIR /solar-forecasting
 
 # deps first for layer caching
 COPY requirements.txt .
-RUN python -m pip install --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+RUN apt-get update && apt-get install -y sqlite3 \
+    && python -m pip install --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt \
+    && rm -rf /var/lib/apt/lists/*
 
 # app code
 COPY . .

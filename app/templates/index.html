@@ -1,55 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Solar Flare Forecast</title>
+    <title>Solar Flare Forecast 24h</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: Tahoma;
+            margin: 0;
+            background-color: white;
+            color: black;
+            text-align: center;
+        }
+
+        .forecast {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            color: black;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 20px;
         }
 
         table {
             border-collapse: collapse;
-            width: 50%;
-        }
-
-        th,
-        td {
-            border: 1px solid #aaa;
-            padding: 8px;
-            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 4px 12px grey;
+            border-radius: 8px;
+            overflow: hidden;
+            table-layout: fixed;
         }
 
         th {
-            background-color: #f2f2f2;
+            width: 25%;
+            background-color: midnightblue;
+            color: white;
+            padding: 12px 10px;
+            font-size: 15px;
+            word-wrap: break-word;
+        }
+
+        td {
+            width: 25%;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            word-wrap: break-word;
+        }
+
+        tr:nth-child(even) {
+            background-color: white;
         }
     </style>
 </head>
-
 <body>
-    <h1>Solar Flare Forecast</h1>
-    <p>Forecast time: {{ forecast.forecast_time }}</p>
-
-    <table>
-        <thead>
-            <tr>
-                <th>HARP Number</th>
-                <th>Intensity / log10 W/m2</th>
-                <th>Error +/-</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for m in forecast.measurements %}
-            <tr>
-                <td>{{ m.harpnum }}</td>
-                <td>{{ m.intensity }}</td>
-                <td>{{ m.error }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="forecast">
+        <h1>24h Solar Flare Forecast</h1>
+        <p><strong>Forecast time:</strong> {{ forecast.forecast_time }}</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>HARP Number</th>
+                    <th>Intensity<br>(log₁₀ W/m²)</th>
+                    <th>Error ±</th>
+                    <th>Class</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in forecast.measurements %}
+                <tr>
+                    <td>{{ m.harpnum }}</td>
+                    <td>{{ m.intensity }}</td>
+                    <td>{{ m.error }}</td>
+                    <td>{{ m.class }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
-
 </html>

@@ -1,0 +1,7 @@
+[
+  { "class": "N", "min_intensity":  -100},
+  { "class": "B", "min_intensity": -7 },
+  { "class": "C", "min_intensity": -6 },
+  { "class": "M", "min_intensity": -5 },
+  { "class": "X", "min_intensity": -4 }
+]

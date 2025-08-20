@@ -23,3 +23,7 @@ data/
 !.gitignore
 
 /data
+
+app/database/*.db
+app/database/*.sqlite
+

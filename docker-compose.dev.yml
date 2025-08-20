@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    container_name: solarforecasting-dev
+    ports:
+      - "5000:5000"
+    env_file: .env
+    volumes:
+      - .:/solar-forecasting          # live-mount your source code
+      - ./app/database:/solar-forecasting/app/database   # <— persists app.db
+    command: ["python", "-m", "flask", "--app", "app.app",
+              "run", "--host=0.0.0.0", "--port=5000", "--debug"]
+    restart: unless-stopped

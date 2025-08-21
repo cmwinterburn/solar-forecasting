@@ -1,6 +1,5 @@
 services:
   web:
-    build: .
     image: cmwinterburn/solar-forecasting:prod
     container_name: solarforecasting-prod
     volumes:

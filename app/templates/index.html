@@ -110,7 +110,7 @@
     <table>
         <thead>
             <tr>
-                <th>Time</th>
+                <th>Time (UTC)</th>
                 <th>HARPNUM</th>
                 <th>Flare Class</th>
                 <th>Intensity<br>(log₁₀ W/m²)</th>
@@ -120,7 +120,7 @@
         <tbody>
             {% for row in forecasts %}
             <tr>
-                <td>{{ row['forecast_time'] }}</td>
+                <td>{{ row['forecast_time'] | humantime }}</td>
                 <td>{{ row['harpnum'] }}</td>
                 <td>{{ row['flare_class'] }}</td>
                 <td>{{ row['intensity'] }}</td>

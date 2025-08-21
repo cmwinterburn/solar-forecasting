@@ -1,29 +1,31 @@
-# Notebook junk
+# Notebook
 .ipynb_checkpoints/
 
 # Python build/cache
 __pycache__/
 *.py[cod]
 
-# Jupyter logs/output
-*.nbconvert.ipynb
-
 # Environments
-env/
 venv/
 
 # Google Colab mount point
 /content/drive/
 
-# VS Code settings (optional)
-.vscode/
-
 # Ignore large data files (DVC managed)
 data/
 !.gitignore
 
+# Large data files for model training
 /data
 
+# SQLite DB files
 app/database/*.db
 app/database/*.sqlite
 
+# Logs
+/logs
+
+# Transitory pipeline files 
+app/pipeline/data_feed.pt
+app/pipeline/forecast.json
+app/pipeline/sharp_metadata_dump.csv

@@ -73,7 +73,7 @@ def download_data(logger, data_download_file):
     first_write = True
     end = Time.now()
     start = end - time_diff
-    days_of_data = 1
+    days_of_data = 2
     i = 0
     
     # Remove any existing data dump before proceeding with data extraction.
